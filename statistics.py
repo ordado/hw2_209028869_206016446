@@ -1,7 +1,7 @@
 import math
 
 
-def sum(values):
+def sum_of_value(values):
     s = 0
     for value in values:
         s += value
@@ -9,7 +9,7 @@ def sum(values):
 
 
 def mean(values):
-    s = sum(values)
+    s = sum_of_value(values)
     return s / len(values)
 
 

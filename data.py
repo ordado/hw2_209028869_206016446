@@ -5,7 +5,7 @@ class Data:
     def __init__(self, path):
         df = pandas.read_csv(path)
         self.data = df.to_dict(orient="list")
-        feature = ["date", "region_code", "denominazione_region", "hospitalized_with_symptoms", "intensive_care",
+        feature = ["data", "region_code", "denominazione_region", "hospitalized_with_symptoms", "intensive_care",
                    "total_hospitalized", "home_insulation", "new_positives", "resigned_healed"]
         for run_feature in feature:
             flag = 0
@@ -22,9 +22,7 @@ class Data:
         for district in self.data["denominazione_region"]:
             flag = 0
             for run_list_districts in list_districts:
-                if district != run_list_districts:
-                    continue
-                else:
+                if district == run_list_districts:
                     flag = 1
             if flag == 0:
                 list_districts.append(district)
@@ -49,3 +47,9 @@ class Data:
     def get_list_of_specific_feature(self, feature):
         list_feature = self.data[feature]
         return list_feature
+
+    def add_key_and_values(self, name_of_key, value):
+        list_new_value = []
+        for run_value in value:
+            list_new_value.append(run_value)
+        self.data[name_of_key] = list_new_value

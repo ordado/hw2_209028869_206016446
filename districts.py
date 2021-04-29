@@ -1,5 +1,4 @@
 import data
-import statistics
 
 
 class Districts:
@@ -31,3 +30,31 @@ class Districts:
                     print(run_statistic_function(temp_list))
                 else:
                     print(run_statistic_function(temp_list), end=", ")
+
+    def determine_day_type(self):
+        resigned_healed_i = self.dataset.get_list_of_specific_feature("resigned_healed")
+        new_positives_i = self.dataset.get_list_of_specific_feature("new_positives")
+        list_type_day = []
+        for index, run_resigned_healed in enumerate(resigned_healed_i):
+            if (run_resigned_healed - new_positives_i[index]) > 0:
+                list_type_day.append(1)
+            else:
+                list_type_day.append(0)
+        self.dataset.add_key_and_values("type_day", list_type_day)
+
+    def get_districts_class(self):
+        is_green_districts = {}
+        list_type_day = self.dataset.get_list_of_specific_feature("type_day")
+        list_districts = self.dataset.get_list_of_specific_feature("denominazione_region")
+        for district in self.dataset.get_all_districts():
+            counter = 0
+            for index, run_list in enumerate(list_type_day):
+                if list_districts[index] == district:
+                    if list_type_day[index] == 1:
+                        counter += 1
+            if counter > 340:
+                is_green_districts[district] = "yes"
+            else:
+                is_green_districts[district] = "no"
+
+        return is_green_districts
