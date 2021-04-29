@@ -20,4 +20,4 @@ def median(values):
         len_of_values = int(len_of_values / 2) - 1
         return (values[len_of_values] + values[len_of_values + 1]) / 2
     else:
-        return float(values[math.ceil((len_of_values - 1) / 2)])
+        return values[math.ceil((len_of_values - 1) / 2)]

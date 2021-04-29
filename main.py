@@ -1,16 +1,20 @@
 import sys
 import data
+import districts
+import statistics
 
 
 def main(argv):
     main_data = data.Data('dpc-covid19-ita-regioni_sample.csv')
-    feature = ["date", "region_code", "denominazione_region", "hospitalized_with_symptoms", "Intensive_care",
-               "total_hospitalized", "home_insulation", "new_positives", "resigned_healed"]
-    print(main_data.data)
-    print(main_data.get_all_districts())
-    feature = ["Sardegna"]
-    main_data.set_districts_data(feature)
-    print(main_data.data)
+
+    # Q1:
+    print("Question 1:")
+    data_q1 = districts.Districts(main_data)
+    districts_d = ['L', 'S']
+    data_q1.filter_districts(districts_d)
+    statistics_features = [statistics.mean, statistics.median]
+    feature_list = ["hospitalized_with_symptoms", "intensive_care", "total_hospitalized", "home_insulation"]
+    data_q1.print_details(feature_list, statistics_features)
 
 
 if __name__ == '__main__':

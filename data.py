@@ -5,7 +5,7 @@ class Data:
     def __init__(self, path):
         df = pandas.read_csv(path)
         self.data = df.to_dict(orient="list")
-        feature = ["date", "region_code", "denominazione_region", "hospitalized_with_symptoms", "Intensive_care",
+        feature = ["date", "region_code", "denominazione_region", "hospitalized_with_symptoms", "intensive_care",
                    "total_hospitalized", "home_insulation", "new_positives", "resigned_healed"]
         for run_feature in feature:
             flag = 0
@@ -45,3 +45,7 @@ class Data:
         for index in reversed(index_need_delete):
             for key in self.data.keys():
                 self.data[key].pop(index)
+
+    def get_list_of_specific_feature(self, feature):
+        list_feature = self.data[feature]
+        return list_feature
